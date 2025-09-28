@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive tea shop</title>
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    
+    </head>
+    <body>
+        <header class="header">
+            <a href="#home" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                <span style="font-size:2.5rem; color: #fff; font-weight: bold; letter-spacing: 2px;">Tea</span>
+                <img src="images/logo.png" style="width:60px;height:60px;" alt="logo">
+            </a>
+            <nav class="navbar">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#products">Products</a>
+                <a href="#review">Review</a>
+                <a href="#contact">Contact</a>
+                <a href="#blogs">blogs</a>
+            </nav>
+            <div class="icons">
+                <div class="fas fa-search"id="search-btn"></div>
+                <div class="fas fa-shopping-cart"id="cart-btn"></div>
+                <div class="fas fa-bars"id="menu-btn"></div>
+            </div>
+            <div class="search-form">
+                <input type="search"id="search-box"placeholder="search here.....">
+                <label for="search-box"class="fas fa-search"></label>
+            </div>
+
+            <div class="cart-items-container">
+                <div class="cart-item">
+                    <span class="fas fa-times"></span>
+                    <img src="images/image 1.png"alt="">
+                    <div class="content">
+                        <h3>Cart item 01</h3>
+                        <div class="price">$20/-</div>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <span class="fas fa-items"></span>
+                    <img src="images/image 9.jpg"alt="">
+                    <div class="content">
+                        <h3>Cart item 02</h3>
+                        <div class="price">$20/-</div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <span class="fas fa-items"></span>
+                    <img src="images/image 3.jpg"alt="">
+                    <div class="content">
+                        <h3>Cart item 03</h3>
+                        <div class="price">$20/-</div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <span class="fas fa-items"></span>
+                    <img src="images/image 8.jpg"alt="">
+                    <div class="content">
+                        <h3>Cart item 04</h3>
+                        <div class="price">$20/-</div>
+                    </div>
+                </div>
+
+                <a href="#"class="btn">Checkout Now</a>
+            </div>
+        </header>
+        <section class="home"id="home">
+            <img src="images/image 5.jpg"alt="">
+            <div class="content">
+                <h3>Fresh Tea in the Morning</h3>
+                <p>Sri Lankan tea is very famous in many countries
+                    of the world under the name of "Ceylon Tea."
+                    This is because of its excellent taste and aroma.
+                    In Sri Lanka, tea is widely grown in the tropics and highlands.
+                </p>
+                <a href="#"class="btn">Get yours Now</a>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <h1 class="heading"><span>About</span> Us</h1>
+            <div class="content">
+                <h3 class="aboutus-header">What makes our tea special?</h3>
+                <pre class="aboutus-paragraph">
+Our tea name is based on several factors. The taste of tea is excellent as it is produced using local tea leaves with the right color and aroma.
+                </pre>
+                <img src="images/image 22.jpg" alt="About Us" class="aboutus-img" style="margin-top:1.5rem;">
+                <a href="#" class="btn aboutus-btn-center">Learn More</a>
+            </div>
+        </section>
+        
+        <section class="menu"id="menu">
+
+            <h1 class="heading">Our<span>Menu</span></h1>
+            <div class="box-container">
+                <div class="box">
+                    <img src="images/image 6.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+                <div class="box">
+                    <img src="images/image 7.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+                <div class="box">
+                    <img src="images/image 8.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+                <div class="box">
+                    <img src="images/image 9.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+                <div class="box">
+                    <img src="images/image 10.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+                <div class="box">
+                    <img src="images/image 11.jpg"alt="">
+                    <h3>Tasty and Healthy</h3>
+                    <div class="price">$20/-<span>$30/-</span></div>
+                    <a href="#"class="btn">Add to Cart</a>
+                </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <section class="products" id="products">
+            <h1 class="heading">Our<span>Products</span></h1>
+            <div class="box-container">
+                <div class="box">
+                    <div class="icons">
+                        <a href="#"class="fas fa-shopping-cart"></a>
+                        <a href="#"class="fas fa-heart"></a>
+                        <a href="#"class="fas fa-eye"></a>
+                    </div>
+                    <div class="image">
+                        <img src="images/image 12.jpg"alt="">
+
+                    </div>
+                    <div class="content">
+                        <h3>Fresh Tea</h3>
+                        <div class="starts">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">$20/-<span>$30/-</span></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icons">
+                        <a href="#"class="fas fa-shopping-cart"></a>
+                        <a href="#"class="fas fa-heart"></a>
+                        <a href="#"class="fas fa-eye"></a>
+                    </div>
+                    <div class="image">
+                        <img src="images/image 13.jpg"alt="">
+
+                    </div>
+                    <div class="content">
+                        <h3>Fresh Tea</h3>
+                        <div class="starts">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">$20/-<span>$30/-</span></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icons">
+                        <a href="#"class="fas fa-shopping-cart"></a>
+                        <a href="#"class="fas fa-heart"></a>
+                        <a href="#"class="fas fa-eye"></a>
+                    </div>
+                    <div class="image">
+                        <img src="images/image 14.jpg"alt="">
+
+                    </div>
+                    <div class="content">
+                        <h3>Fresh Tea</h3>
+                        <div class="starts">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">$20/-<span>$30/-</span></div>
+                    </div>
+                    </div>
+
+            </div>
+        </section>
+        <section class="review"id="review">
+            <h1 class="heading">Customer's<span>Review</span></h1>
+            <div class="box-container">
+
+
+                <div class="box">
+                    <img src=""alt=""class="quote">
+                    <p>Welcome to our tea shop!. We take great pride in offering you the best 
+                        tea from across the globe. We have something for everyone, regardless 
+                        of your level of tea experience. You can enjoy the taste of our teas.
+                        To improve your tea experience, we also provide useful guids and advice.
+                    </p>
+                         <img src="images/image 16.jpg"style="top:10px;"class="user"alt="">
+                         <h3>Mehreen</h3>
+                         <div class="content">
+                            
+                            <div class="starts">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+
+                </div>
+                
+                <div class="box">
+                    <img src=""alt=""class="quote">
+                    <p>Welcome to our tea shop!.We have many types of tea form
+                        different places. You can find calming teas. 
+                        We will help you make them just right. Come and 
+                        join us, enjoy better tea experience.</p>
+                         <img src="images/image 17.jpg"class="user"alt="">
+                         <h3>Zirwa</h3>
+                         <div class="starts">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+
+
+            </div>
+        </section>
+        <section class="contact" id="contact">
+            <div class="row">
+                <div class="image">
+                    <img src="images/image 1.png"alt=""style="height:80vh;width:90vh">
+                </div>
+                <form action="your_script.php" method="POST">
+                    <h3>Get in Touch</h3>
+                    <div class="inputBox">
+                        <span class="fas fa-user"></span>
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fas fa-envelope"></span>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fas fa-phone"></span>
+                        <input type="tel" name="phone" placeholder="Phone">
+                    </div>
+                    <input type="submit" value="Contact Now" class="btn">
+                </form>
+            </div>
+        </section>
+                <section class="blogs" id="blogs">
+                    <h1 class="heading">Our <span>Blogs</span></h1>
+                    <div class="box-container">
+
+                    <div class="box">
+                    <div class="image">
+                        <img src="images/image 21.jpg"alt="">
+
+                    </div>
+                    <div class="content">
+                        <a href="#"class="title">&nbsp;&nbsp;&nbsp;Tasty and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By Admin/4th march,2024</span>
+                        <p>Our tea name is based on sevaral factors. The taste of
+                            tea is excellent as it is produced using local tea leaves
+                             with the right color and aroma.</p>
+                             <a href="#"class="btn">Read More</a>
+                    </div>
+                    <div class="box">
+                        <div class="image">
+                            <img src="images/image 19.jpg"alt="">
+
+                        </div>
+                        <div class="content">
+                            <a href="#"class="title">&nbsp;&nbsp;&nbsp;Tasty and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By Admin/4th march,2024</span>
+                        <p>Our tea name is based on sevaral factors. The taste of
+                            tea is excellent as it is produced using local tea leaves
+                             with the right color and aroma.</p>
+                             <a href="#"class="btn">Read More</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="image">
+                            <img src="images/image 20.jpg"alt="">
+
+                        </div>
+                        <div class="content">
+                            <a href="#"class="title">&nbsp;&nbsp;&nbsp;Tasty and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refreshing tea</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By Admin/4th march,2024</span>
+                        <p>Our tea name is based on sevaral factors. The taste of
+                            tea is excellent as it is produced using local tea leaves
+                             with the right color and aroma.</p>
+                             <a href="#"class="btn">Read More</a>
+                        </div>
+                </section>
+                <section class="footer">
+                    <div class="share">
+                        <a href="https://www.facebook.com/"class="fab fa-facebook-f"target="_blank"></a>
+                        <a href="https://www.whatsapp.com/"class="fab fa-whatsapp"target="_blank"></a>
+                        <a href="https://www.twitter.com/"class="fab fa-twitter"target="_blank"></a>
+                        <a href="https://www.instagram.com/"class="fab fa-instagram"target="_blank"></a>
+                        <a href="https://www.linkedin.com/"class="fab fa-linkedin"target="_blank"></a>
+                        <a href="https://www.printerest.com/"class="fab fa-printerest"target="_blank"></a>
+                    </div>
+
+                    <div class="links">
+                        <a href="#home">home</a>
+                        <a href="#about">about</a>
+                        <a href="#menu">menu</a>
+                        <a href="#products">products</a>
+                        <a href="#review">review</a>
+                        <a href="#contact">contact</a>
+                        <a href="#blogs">blogs</a>
+                    </div>
+
+                    <div class="credit">Credited by<span>Binuri Nimthera</span> All rights reserved</div>
+                </section>
+            </div>
+        </section>
+        <script src="Teawebsite.js"></script>
+
+       
+    </body>
+    </html>
