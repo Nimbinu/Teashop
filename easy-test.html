@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teashop - Easy Backend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+        
+        .test-card.success {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+        
+        .test-card.error {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.2);
+        }
+        
+        .test-card.loading {
+            border-color: #ff9800;
+            background: rgba(255, 152, 0, 0.2);
+        }
+        
+        .status-icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+        
+        .test-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .test-details {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-left: 50px;
+        }
+        
+        .button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 10px 10px 10px 0;
+            transition: background 0.3s;
+        }
+        
+        .button:hover {
+            background: #45a049;
+        }
+        
+        .button.secondary {
+            background: #2196F3;
+        }
+        
+        .button.secondary:hover {
+            background: #1976D2;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Teashop Backend Connection Test</h1>
+        <p>This page will help you understand if your frontend and backend are working together</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📖 What This Page Does:</h3>
+        <ul>
+            <li><strong>Tests your backend server</strong> - Checks if it's running</li>
+            <li><strong>Tests your database</strong> - Checks if products are saved</li>
+            <li><strong>Tests API connection</strong> - Checks if frontend can talk to backend</li>
+            <li><strong>Shows you the data</strong> - Displays actual products from your database</li>
+        </ul>
+    </div>
+
+    <!-- Test Results -->
+    <div id="serverTest" class="test-card loading">
+        <div class="test-title">
+            <span class="status-icon">🔄</span>
+            Testing Backend Server...
+        </div>
+        <div class="test-details">Checking if your server is running on http://localhost:5000</div>
+    </div>
+
+    <div id="databaseTest" class="test-card loading">
+        <div class="test-title">
+            <span class="status-icon">🔄</span>
+            Testing Database Connection...
+        </div>
+        <div class="test-details">Checking if your MongoDB database has products</div>
+    </div>
+
+    <div id="apiTest" class="test-card loading">
+        <div class="test-title">
+            <span class="status-icon">🔄</span>
+            Testing API Endpoints...
+        </div>
+        <div class="test-details">Checking if frontend can get data from backend</div>
+    </div>
+
+    <!-- Manual Test Buttons -->
+    <div style="margin: 30px 0;">
+        <h3>🎮 Manual Tests (Click These):</h3>
+        <button class="button" onclick="runAllTests()">🧪 Run All Tests</button>
+        <button class="button secondary" onclick="showProducts()">📦 Show Products</button>
+        <button class="button secondary" onclick="testContact()">📧 Test Contact</button>
+        <button class="button secondary" onclick="showInstructions()">📖 Show Instructions</button>
+    </div>
+
+    <!-- Results Display -->
+    <div id="resultsArea"></div>
+    <div id="productsArea"></div>
+    <div id="instructionsArea"></div>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const SERVER_URL = 'http://localhost:5000';
+
+        // Test Functions
+        async function testServerConnection() {
+            const testCard = document.getElementById('serverTest');
+            
+            try {
+                console.log('Testing server connection...');
+                const response = await fetch(SERVER_URL);
+                const text = await response.text();
+                
+                if (response.ok) {
+                    testCard.className = 'test-card success';
+                    testCard.innerHTML = \`
+                        <div class="test-title">
+                            <span class="status-icon">✅</span>
+                            Backend Server is Running!
+                        </div>
+                        <div class="test-details">
+                            ✅ Server is active on port 5000<br>
+                            ✅ Server responded with: "\${text}"
+                        </div>
+                    \`;
+                    return true;
+                } else {
+                    throw new Error('Server responded with error');
+                }
+            } catch (error) {
+                testCard.className = 'test-card error';
+                testCard.innerHTML = \`
+                    <div class="test-title">
+                        <span class="status-icon">❌</span>
+                        Backend Server Not Working
+                    </div>
+                    <div class="test-details">
+                        ❌ Error: \${error.message}<br>
+                        🔧 <strong>Solution:</strong> Make sure to run "node server.js" in your backend folder
+                    </div>
+                \`;
+                return false;
+            }
+        }
+
+        async function testDatabaseConnection() {
+            const testCard = document.getElementById('databaseTest');
+            
+            try {
+                console.log('Testing database connection...');
+                const response = await fetch(\`\${API_BASE_URL}/products\`);
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    if (data.data.length > 0) {
+                        testCard.className = 'test-card success';
+                        testCard.innerHTML = \`
+                            <div class="test-title">
+                                <span class="status-icon">✅</span>
+                                Database Connected & Has Data!
+                            </div>
+                            <div class="test-details">
+                                ✅ MongoDB is connected<br>
+                                ✅ Found \${data.data.length} products in database<br>
+                                ✅ Your products: \${data.data.map(p => p.name).slice(0, 3).join(', ')}...
+                            </div>
+                        \`;
+                        return data.data;
+                    } else {
+                        testCard.className = 'test-card error';
+                        testCard.innerHTML = \`
+                            <div class="test-title">
+                                <span class="status-icon">⚠️</span>
+                                Database Connected But Empty
+                            </div>
+                            <div class="test-details">
+                                ✅ MongoDB is connected<br>
+                                ❌ No products found in database<br>
+                                🔧 <strong>Solution:</strong> Run "node seeder.js" in your backend folder
+                            </div>
+                        \`;
+                        return [];
+                    }
+                } else {
+                    throw new Error('Database query failed');
+                }
+            } catch (error) {
+                testCard.className = 'test-card error';
+                testCard.innerHTML = \`
+                    <div class="test-title">
+                        <span class="status-icon">❌</span>
+                        Database Connection Failed
+                    </div>
+                    <div class="test-details">
+                        ❌ Error: \${error.message}<br>
+                        🔧 Make sure MongoDB is running and your server is started
+                    </div>
+                \`;
+                return null;
+            }
+        }
+
+        async function testAPIConnection() {
+            const testCard = document.getElementById('apiTest');
+            
+            try {
+                console.log('Testing API connection...');
+                const response = await fetch(\`\${API_BASE_URL}/products\`);
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    testCard.className = 'test-card success';
+                    testCard.innerHTML = \`
+                        <div class="test-title">
+                            <span class="status-icon">✅</span>
+                            API Endpoints Working!
+                        </div>
+                        <div class="test-details">
+                            ✅ Frontend can communicate with backend<br>
+                            ✅ API returned \${data.count} products<br>
+                            ✅ Your website can now load dynamic content!
+                        </div>
+                    \`;
+                    return true;
+                } else {
+                    throw new Error('API returned error');
+                }
+            } catch (error) {
+                testCard.className = 'test-card error';
+                testCard.innerHTML = \`
+                    <div class="test-title">
+                        <span class="status-icon">❌</span>
+                        API Connection Failed
+                    </div>
+                    <div class="test-details">
+                        ❌ Error: \${error.message}<br>
+                        🔧 Check if your backend server is running
+                    </div>
+                \`;
+                return false;
+            }
+        }
+
+        async function runAllTests() {
+            console.log('🧪 Running all tests...');
+            
+            // Test 1: Server
+            const serverOk = await testServerConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Test 2: Database
+            const products = await testDatabaseConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Test 3: API
+            const apiOk = await testAPIConnection();
+            
+            // Show summary
+            if (serverOk && products && products.length > 0 && apiOk) {
+                showSuccessMessage();
+            } else {
+                showTroubleshootingHelp();
+            }
+        }
+
+        function showSuccessMessage() {
+            document.getElementById('resultsArea').innerHTML = \`
+                <div class="test-card success">
+                    <div class="test-title">
+                        <span class="status-icon">🎉</span>
+                        Everything is Working Perfectly!
+                    </div>
+                    <div class="test-details">
+                        <p><strong>Your teashop website is fully functional:</strong></p>
+                        <ul>
+                            <li>✅ Backend server is running</li>
+                            <li>✅ Database is connected and has products</li>
+                            <li>✅ API endpoints are working</li>
+                            <li>✅ Frontend can load data from backend</li>
+                        </ul>
+                        <p><strong>Next Steps:</strong></p>
+                        <ol>
+                            <li>Open your main website (index.html) - it should show products from database</li>
+                            <li>Test the shopping cart functionality</li>
+                            <li>Try submitting the contact form</li>
+                        </ol>
+                    </div>
+                </div>
+            \`;
+        }
+
+        function showTroubleshootingHelp() {
+            document.getElementById('resultsArea').innerHTML = \`
+                <div class="test-card error">
+                    <div class="test-title">
+                        <span class="status-icon">🔧</span>
+                        Troubleshooting Needed
+                    </div>
+                    <div class="test-details">
+                        <p><strong>Some tests failed. Here's how to fix them:</strong></p>
+                        
+                        <h4>If Server Test Failed:</h4>
+                        <ol>
+                            <li>Open Command Prompt/Terminal</li>
+                            <li>Navigate to your backend folder: <code>cd "E:\\Teashop\\backend"</code></li>
+                            <li>Start the server: <code>node server.js</code></li>
+                            <li>You should see: "Server running on port 5000"</li>
+                        </ol>
+                        
+                        <h4>If Database Test Failed:</h4>
+                        <ol>
+                            <li>Make sure MongoDB is running on your computer</li>
+                            <li>In your backend folder, run: <code>node seeder.js</code></li>
+                            <li>This will add sample products to your database</li>
+                        </ol>
+                        
+                        <h4>If API Test Failed:</h4>
+                        <ol>
+                            <li>Check if both server and database tests passed first</li>
+                            <li>Try refreshing this page</li>
+                            <li>Check browser console for CORS errors (these are normal)</li>
+                        </ol>
+                    </div>
+                </div>
+            \`;
+        }
+
+        async function showProducts() {
+            try {
+                const response = await fetch(\`\${API_BASE_URL}/products\`);
+                const data = await response.json();
+                
+                if (data.success && data.data.length > 0) {
+                    let productsHTML = \`
+                        <div class="test-card success">
+                            <div class="test-title">
+                                <span class="status-icon">📦</span>
+                                Products from Your Database (\${data.data.length} items)
+                            </div>
+                            <div class="products-grid">
+                    \`;
+                    
+                    data.data.forEach(product => {
+                        productsHTML += \`
+                            <div class="product-card">
+                                <h3>\${product.name}</h3>
+                                <p><strong>Price:</strong> $\${product.price}</p>
+                                <p><strong>Category:</strong> \${product.category}</p>
+                                <p><strong>Rating:</strong> \${product.rating}/5 stars</p>
+                                <p><strong>In Stock:</strong> \${product.inStock ? 'Yes' : 'No'}</p>
+                                <p><strong>Description:</strong> \${product.description}</p>
+                                \${product.discountPrice > 0 ? \`<p><strong>Discount Price:</strong> $\${product.discountPrice}</p>\` : ''}
+                            </div>
+                        \`;
+                    });
+                    
+                    productsHTML += \`
+                            </div>
+                        </div>
+                    \`;
+                    
+                    document.getElementById('productsArea').innerHTML = productsHTML;
+                } else {
+                    document.getElementById('productsArea').innerHTML = \`
+                        <div class="test-card error">
+                            <div class="test-title">
+                                <span class="status-icon">❌</span>
+                                No Products Found
+                            </div>
+                            <div class="test-details">
+                                Your database is empty. Run <code>node seeder.js</code> in your backend folder to add sample products.
+                            </div>
+                        </div>
+                    \`;
+                }
+            } catch (error) {
+                document.getElementById('productsArea').innerHTML = \`
+                    <div class="test-card error">
+                        <div class="test-title">
+                            <span class="status-icon">❌</span>
+                            Failed to Load Products
+                        </div>
+                        <div class="test-details">
+                            Error: \${error.message}. Make sure your backend server is running.
+                        </div>
+                    </div>
+                \`;
+            }
+        }
+
+        async function testContact() {
+            try {
+                const testData = {
+                    name: 'Test User',
+                    email: 'test@example.com',
+                    subject: 'API Test Message',
+                    message: 'This is a test message to check if the contact form API is working.'
+                };
+                
+                const response = await fetch(\`\${API_BASE_URL}/contact\`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const result = await response.json();
+                
+                document.getElementById('resultsArea').innerHTML = \`
+                    <div class="test-card success">
+                        <div class="test-title">
+                            <span class="status-icon">✅</span>
+                            Contact Form API Working!
+                        </div>
+                        <div class="test-details">
+                            <p>Successfully sent a test message to your backend.</p>
+                            <div class="code-block">\${JSON.stringify(result, null, 2)}</div>
+                        </div>
+                    </div>
+                \`;
+            } catch (error) {
+                document.getElementById('resultsArea').innerHTML = \`
+                    <div class="test-card error">
+                        <div class="test-title">
+                            <span class="status-icon">❌</span>
+                            Contact Form API Failed
+                        </div>
+                        <div class="test-details">
+                            Error: \${error.message}
+                        </div>
+                    </div>
+                \`;
+            }
+        }
+
+        function showInstructions() {
+            document.getElementById('instructionsArea').innerHTML = \`
+                <div class="test-card">
+                    <div class="test-title">
+                        <span class="status-icon">📖</span>
+                        Complete Setup Instructions
+                    </div>
+                    <div class="test-details">
+                        <h3>🏗️ Your Project Structure:</h3>
+                        <div class="code-block">E:\\Teashop\\
+├── index.html          (Your main website)
+├── styles.css          (Website styling)
+├── teashop.js          (Website functionality)
+├── images/             (Product images)
+└── backend/            (Server & database code)
+    ├── server.js       (Main server file)
+    ├── models/         (Database structure)
+    ├── routes/         (API endpoints)
+    └── controllers/    (Business logic)</div>
+                        
+                        <h3>🔄 How Frontend & Backend Connect:</h3>
+                        <ol>
+                            <li><strong>Frontend (index.html)</strong> loads in browser</li>
+                            <li><strong>JavaScript (teashop.js)</strong> makes API calls to backend</li>
+                            <li><strong>Backend (server.js)</strong> processes requests</li>
+                            <li><strong>Database (MongoDB)</strong> stores/retrieves data</li>
+                            <li><strong>Backend</strong> sends data back to frontend</li>
+                            <li><strong>Frontend</strong> displays the data to users</li>
+                        </ol>
+                        
+                        <h3>🚀 To Start Your Website:</h3>
+                        <ol>
+                            <li>Start MongoDB (usually runs automatically)</li>
+                            <li>Open terminal in backend folder</li>
+                            <li>Run: <code>node server.js</code></li>
+                            <li>Open <code>index.html</code> in your browser</li>
+                            <li>Your website will load products from the database!</li>
+                        </ol>
+                        
+                        <h3>🔧 Common Issues & Solutions:</h3>
+                        <ul>
+                            <li><strong>Products not loading:</strong> Check if backend server is running</li>
+                            <li><strong>CORS errors:</strong> Normal when opening HTML files directly</li>
+                            <li><strong>Empty database:</strong> Run <code>node seeder.js</code></li>
+                            <li><strong>Port 5000 busy:</strong> Change PORT in .env file</li>
+                        </ul>
+                    </div>
+                </div>
+            \`;
+        }
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            console.log('🧪 Auto-running tests...');
+            setTimeout(runAllTests, 1000);
+        });
+    </script>
+</body>
+</html>
